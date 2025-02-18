@@ -1,2 +1,2 @@
 # Natural-Language-Processing
-NLP Projects- Text Mining
+This repository contains several concepts used for NLP. 

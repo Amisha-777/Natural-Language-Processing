@@ -1,0 +1,81 @@
+# Text Representation Techniques
+This document provides an overview of various text representation techniques used in Natural Language Processing (NLP).
+
+## Techniques
+
+### A. Corpus
+A collection of text documents used for training NLP models. It serves as the foundation for various text-processing tasks.
+
+### B. Bag of Words (BoW)
+A simplistic text representation model that converts text into word frequency counts, disregarding grammar and word order.
+
+### C. Term Frequency (TF)
+Measures how frequently a word appears in a document. Higher frequency words are considered more important.
+- **Formula:** 
+  \[ TF = \frac{\text{Number of times a word appears in a document}}{\text{Total words in the document}} \]
+- **Interpretation:** A higher TF value means the word is frequently occurring within the document, indicating its relevance to that specific document.
+- **Limitations:** Does not consider word importance across multiple documents, which is why it's often combined with IDF.
+- **Use Cases:** Search engines, text classification, and keyword extraction.
+
+### D. Inverse Document Frequency (IDF)
+A weighting factor that reduces the importance of commonly occurring words across documents and highlights rare terms.
+- **Formula:** 
+  \[ IDF = \log\left(\frac{\text{Total number of documents}}{\text{Number of documents containing the word}}\right) \]
+- **Interpretation:**
+  - Words appearing in many documents receive a low IDF score, meaning they are less informative.
+  - Rare words receive a high IDF score, meaning they are more significant.
+- **Use Cases:** Enhancing the importance of domain-specific terms in large corpora and improving search engine ranking.
+
+### E. TF-IDF (Term Frequency-Inverse Document Frequency)
+A statistical measure combining TF and IDF to evaluate a word's relevance in a document relative to a corpus.
+- **Formula:** 
+  \[ TF-IDF = TF \times IDF \]
+- **Interpretation:**
+  - A high TF-IDF score means a term appears frequently in a document but rarely in the entire corpus, making it highly relevant.
+  - A low TF-IDF score means the term is either too common across all documents or appears infrequently in the given document.
+- **Use Cases:** Information retrieval, document similarity analysis, and text mining.
+
+### F. N-grams
+Sequences of 'n' consecutive words or characters used to capture context in text. Examples:
+- Unigrams (single words)
+- Bigrams (two-word sequences)
+- Trigrams (three-word sequences)
+
+### G. Document Similarity (Cosine Similarity)
+A method to measure the similarity between two documents by calculating the cosine of the angle between their vector representations.
+- **Formula:**
+  \[ \text{Similarity} = \frac{A \cdot B}{||A|| \times ||B||} \]
+- **Interpretation:**
+  - A cosine similarity value close to **1** means the documents are very similar.
+  - A value close to **0** indicates little to no similarity.
+  - A value of **-1** (in rare cases) suggests documents are completely dissimilar.
+- **Use Cases:** Information retrieval, document clustering, and search engines.
+
+### H. Word Embeddings
+#### What are Word Embeddings?
+Numeric representations of words in a lower-dimensional space, capturing semantic and syntactic relationships.
+- Used to reduce dimensionality and understand word associations within a corpus.
+
+#### Comparison of Word Embedding Models
+| Aspect                | Word2Vec                                        | GloVe                                           | FastText                                     |
+|----------------------|----------------------------------|----------------------------------|----------------------------------|
+| **Type**             | Predictive Model (Neural Network-based) | Count-based Model (Matrix Factorization) | Predictive Model (Neural Network-based, with subwords) |
+| **Training Approach** | Uses a shallow neural network to learn word vectors by predicting word context. | Learns word vectors by factorizing a word co-occurrence matrix. | Similar to Word2Vec but breaks words into subword n-grams. |
+| **Variants**         | Skip-gram (predicts context words given a target word), CBOW (predicts a word given surrounding context). | No major variants, but can be trained on different corpora sizes. | Uses subword information (character n-grams), improving performance for rare words. |
+| **Corpus Dependency** | Works well with a large corpus. | Needs a very large corpus for good performance. | Works well with both small and large corpora. |
+| **Global vs. Local Context** | Focuses on local context by predicting word relations in short windows. | Captures global word co-occurrence statistics across the entire corpus. | Similar to Word2Vec but also considers subwords, making it more robust. |
+| **Handling of Out-of-Vocabulary (OOV) Words** | Does not handle OOV words well (words unseen during training have no vector). | Does not handle OOV words well (unknown words are not represented). | Handles OOV words better by breaking them into character n-grams. |
+| **Computational Efficiency** | Fast and efficient for large-scale training. | Slower as it requires matrix factorization. | Slower than Word2Vec due to additional subword computations. |
+| **Use Cases** | Sentiment analysis, chatbots, document classification. | Information retrieval, word similarity tasks, machine translation. | Best for morphologically rich languages (e.g., French, German), better for handling rare words. |
+| **Strengths** | Fast and effective for capturing semantic and syntactic relationships between words. | Strong at capturing global word relationships (better for word analogy tasks). | Best for rare words and languages with complex word structures (e.g., inflections). |
+| **Weaknesses** | Cannot handle OOV words (unknown words remain unrepresented). | Needs a large dataset and is computationally expensive. | Slower to train due to its handling of subwords. |
+
+### 🔹 Which One Should You Use?
+- **Use Word2Vec** if you need fast training and your corpus contains frequent words.
+- **Use GloVe** if you want to capture global word relationships and have a very large dataset.
+- **Use FastText** if you are working with morphologically rich languages or need better handling of rare words.
+
+---
+
+These text representation techniques play a crucial role in modern NLP applications, enabling effective text analysis and understanding.
+
